@@ -17,14 +17,15 @@ function App() {
           <th>Types</th>
         </thead>
         <tbody>
-          {pokemon.map()}
-          <tr>
-            <td>Bulbasaur</td>
-            <td>Grass, Poison</td>
-          </tr>
+          {pokemon.slice(0,151).map(pokemon => (
+            <tr key={pokemon.id}>
+              <td>{pokemon.name.english}</td>
+              <td>{pokemon.type.join(', ')}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
-      
+
     </div>
   )
 }
