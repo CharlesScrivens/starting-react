@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import pokemon from './pokemon.json';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <th>Types</th>
         </thead>
         <tbody>
+          {pokemon.map()}
           <tr>
             <td>Bulbasaur</td>
             <td>Grass, Poison</td>
