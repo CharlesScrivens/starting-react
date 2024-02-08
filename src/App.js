@@ -50,7 +50,7 @@ function App() {
             </thead>
             <tbody>
               {pokemon.filter((pokemon) => pokemon.name.english.toLowerCase().includes(filter.toLowerCase())).slice(0, 151).map(pokemon => (
-                <PokemonRow pokemon={pokemon} key={pokemon.id} onSelect={(pokemon) => selectedItem(pokemon)} />
+                <PokemonRow pokemon={pokemon} key={pokemon.id} onSelect={(pokemon) => selectedItemSet(pokemon)} />
               ))}
             </tbody>
           </table>
