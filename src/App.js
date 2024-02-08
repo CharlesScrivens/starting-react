@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes, { string } from 'prop-types';
 import './App.css';
-import styled from "@emotion/react"
+import styled from "@emotion/styled"
 
 
 const PokemonRow = ({ pokemon, onSelect }) => (
