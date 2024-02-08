@@ -29,7 +29,7 @@ function App() {
       paddingTop: "1rem",
     }}>
       <h1 className='title'>Pokemon Search</h1>
-      <input filter={value}onChange={(evt) => filterSet(evt.target.value)}/>
+      <input value={filter} onChange={(evt) => filterSet(evt.target.value)}/>
       <table width="100%">
         <thead>
           <th>Pokemon</th>
