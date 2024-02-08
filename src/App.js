@@ -84,7 +84,6 @@ const Input = styled.input`
   padding: .2rem;
 `;
 
-
 // practice class based vs. function based
 class App extends React.Component {
   constructor(props) {
