@@ -55,8 +55,27 @@ PokemonInfo.propTypes = {
 
 }
 
+// using styled to make css
 const Title = styled.h1`
   text-align: center;
+`;
+
+const TwoColumnLayout = styled.div`
+  display: grid;
+  grid-template-columns: 70% 30%;
+  grid-column-gap: 1 rem;
+`;
+
+const Container = styled.div`
+  margin: auto;
+  width: 800px;
+  paddingTop: 1rem;
+`;
+
+const Input = styled.input`
+  width: 100%;
+  font-size: x-large;
+  padding: .2rem;
 `;
 
 function App() {
@@ -70,23 +89,14 @@ function App() {
   //hook to get the data from json file
   React.useEffect(() => {
     fetch("http://localhost:3000/starting-react/pokemon.json")
-    .then((resp) => resp.json())
-    .then((data) => pokemonSet(data))
+      .then((resp) => resp.json())
+      .then((data) => pokemonSet(data))
   }, [])
   return (
-    <div style={{
-      margin: "auto",
-      width: 800,
-      paddingTop: "1rem",
-    }}>
+    <Container>
       <Title>Pokemon Search</Title>
-      <input value={filter} onChange={(evt) => filterSet(evt.target.value)} />
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: "70% 30%",
-          gridColumn: "1 rem",
-        }}>
+      <Input value={filter} onChange={(evt) => filterSet(evt.target.value)} />
+      <TwoColumnLayout>
         <div>
           <table width="100%">
             <thead>
@@ -101,8 +111,8 @@ function App() {
           </table>
         </div>
         {selectedItem && <PokemonInfo {...selectedItem} />}
-      </div>
-    </div>
+      </TwoColumnLayout>
+    </Container>
   )
 }
 
