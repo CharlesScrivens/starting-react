@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes, { string } from 'prop-types';
 import './App.css';
+import styled from "@emotion/react"
 
 
 const PokemonRow = ({ pokemon, onSelect }) => (
@@ -54,6 +55,10 @@ PokemonInfo.propTypes = {
 
 }
 
+const Title = styled.h1`
+  text-align: center;
+`;
+
 function App() {
   //need to track input text
   const [filter, filterSet] = React.useState("");
@@ -74,7 +79,7 @@ function App() {
       width: 800,
       paddingTop: "1rem",
     }}>
-      <h1 className='title'>Pokemon Search</h1>
+      <Title>Pokemon Search</Title>
       <input value={filter} onChange={(evt) => filterSet(evt.target.value)} />
       <div
         style={{
