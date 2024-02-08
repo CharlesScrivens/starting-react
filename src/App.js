@@ -55,7 +55,7 @@ PokemonInfo.propTypes = {
 
 }
 
-// using styled to make css
+// using styled to make css into tags
 const Title = styled.h1`
   text-align: center;
 `;
