@@ -10,6 +10,7 @@ import { Button } from "@mui/material";
 const PokemonRow = ({ pokemon, onSelect }) => (
   <tr>
     <td>{pokemon.name.english}</td>
+    <td>{pokemon.name.japanese}</td>
     <td>{pokemon.type.join(', ')}</td>
     <td>
       <Button
@@ -24,6 +25,7 @@ PokemonRow.propTypes = {
   pokemon: PropTypes.shape({
     name: PropTypes.shape({
       english: PropTypes.string,
+      japanese: PropTypes.string,
     }),
     type: PropTypes.arrayOf(PropTypes.string),
   }),
@@ -33,6 +35,7 @@ PokemonRow.propTypes = {
 const PokemonInfo = ({ name, base }) => (
   <div>
     <h1>{name.english}</h1>
+    <h4>{name.japanese}</h4>
     <table>
       {
         Object.keys(base).map(key => (
@@ -49,6 +52,7 @@ const PokemonInfo = ({ name, base }) => (
 PokemonInfo.propTypes = {
   name: PropTypes.shape({
     english: PropTypes.string,
+    japanese: PropTypes.string,
   }),
   base: PropTypes.shape({
     HP: PropTypes.number.isRequired,
@@ -116,10 +120,11 @@ class App extends React.Component {
             <table width="100%">
               <thead>
                 <th>Pokemon</th>
+                <th>Japanese Name</th>
                 <th>Types</th>
               </thead>
               <tbody>
-                {this.state.pokemon.filter((pokemon) => pokemon.name.english.toLowerCase().includes(this.state.filter.toLowerCase())).slice(0, 151).map(pokemon => (
+                {this.state.pokemon.filter((pokemon) => pokemon.name.english.toLowerCase().includes(this.state.filter.toLowerCase())).map(pokemon => (
                   <PokemonRow pokemon={pokemon} key={pokemon.id} onSelect={(pokemon) => this.setState({
                     ...this.state,
                     selectedItem: pokemon
