@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes, { string } from 'prop-types';
 import './App.css';
-import styled from "@emotion/styled"
-import { Button } from "@mui/material"
+import styled from "@emotion/styled";
+import { Button } from "@mui/material";
+
+
 
 
 const PokemonRow = ({ pokemon, onSelect }) => (
@@ -10,10 +12,10 @@ const PokemonRow = ({ pokemon, onSelect }) => (
     <td>{pokemon.name.english}</td>
     <td>{pokemon.type.join(', ')}</td>
     <td>
-      <Button 
-      variant="outlined" 
-      color='primary'
-      onClick={() => onSelect(pokemon)} >Select!</Button>
+      <Button
+        variant="outlined"
+        color='primary'
+        onClick={() => onSelect(pokemon)} >Select!</Button>
     </td>
   </tr>
 );
@@ -82,6 +84,68 @@ const Input = styled.input`
   padding: .2rem;
 `;
 
+
+// practice class based vs. function based
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      filter: "",
+      pokemon: [],
+      selectedItem: null,
+    }
+  }
+
+  componentDidMount() {
+    fetch("http://localhost:3000/starting-react/pokemon.json")
+      .then((resp) => resp.json())
+      .then((pokemon) =>
+        this.setState({
+          ...this.state,
+          pokemon,
+        })
+      );
+  }
+
+  render() {
+    return (
+      <Container>
+        <Title>Pokemon Search</Title>
+        <Input value={this.state.filter} onChange={(evt) => this.setState({ ...this.state, filter: evt.target.value })} />
+        <TwoColumnLayout>
+          <div>
+            <table width="100%">
+              <thead>
+                <th>Pokemon</th>
+                <th>Types</th>
+              </thead>
+              <tbody>
+                {this.state.pokemon.filter((pokemon) => pokemon.name.english.toLowerCase().includes(this.state.filter.toLowerCase())).slice(0, 151).map(pokemon => (
+                  <PokemonRow pokemon={pokemon} key={pokemon.id} onSelect={(pokemon) => this.setState({
+                    ...this.state,
+                    selectedItem: pokemon
+                  })}
+                  />
+                ))}
+              </tbody>
+            </table>
+          </div>
+          {this.state.selectedItem && <PokemonInfo {...this.state.selectedItem} />}
+        </TwoColumnLayout>
+      </Container>
+    )
+  }
+}
+
+/*
+  //hook to get the data from json file
+  React.useEffect(() => {
+    fetch("http://localhost:3000/starting-react/pokemon.json")
+      .then((resp) => resp.json())
+      .then((data) => pokemonSet(data))
+  }, []);
+  */
+/*
 function App() {
   //need to track input text
   const [filter, filterSet] = React.useState("");
@@ -90,12 +154,7 @@ function App() {
   //use state for getting pokemon from server
   const [pokemon, pokemonSet] = React.useState([]);
 
-  //hook to get the data from json file
-  React.useEffect(() => {
-    fetch("http://localhost:3000/starting-react/pokemon.json")
-      .then((resp) => resp.json())
-      .then((data) => pokemonSet(data))
-  }, [])
+
   return (
     <Container>
       <Title>Pokemon Search</Title>
@@ -119,5 +178,5 @@ function App() {
     </Container>
   )
 }
-
+*/
 export default App;
