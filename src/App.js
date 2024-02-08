@@ -20,6 +20,8 @@ PokemonRow.propTypes = {
 };
 
 function App() {
+  //need to track input text
+  const [filter, filterSet] = React.useState("");
   return (
     <div style={{
       margin: "auto",
@@ -27,14 +29,14 @@ function App() {
       paddingTop: "1rem",
     }}>
       <h1 className='title'>Pokemon Search</h1>
-
+      <input filter={value}onChange={(evt) => filterSet(evt.target.value)}/>
       <table width="100%">
         <thead>
           <th>Pokemon</th>
           <th>Types</th>
         </thead>
         <tbody>
-          {pokemon.slice(0, 151).map(pokemon => (
+          {pokemon.filter((pokemon) => pokemon.name.english.includes(filter)).slice(0, 151).map(pokemon => (
             <PokemonRow pokemon={pokemon} key={pokemon.id} />
           ))}
         </tbody>
