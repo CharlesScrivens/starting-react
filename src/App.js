@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes, { string } from 'prop-types';
 import './App.css';
-import pokemon from './pokemon.json';
+
 
 const PokemonRow = ({ pokemon, onSelect }) => (
   <tr>
@@ -59,6 +59,15 @@ function App() {
   const [filter, filterSet] = React.useState("");
   //use for selecting (another state)
   const [selectedItem, selectedItemSet] = React.useState(null);
+  //use state for getting pokemon from server
+  const [pokemon, pokemonSet] = React.useState([]);
+
+  //hook to get the data from json file
+  React.useEffect(() => {
+    fetch("http://localhost:3000/starting-react/pokemon.json")
+    .then((resp) => resp.json())
+    .then((data) => pokemonSet(data))
+  }, [])
   return (
     <div style={{
       margin: "auto",
